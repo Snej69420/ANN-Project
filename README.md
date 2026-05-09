@@ -89,3 +89,12 @@ This represents a retention of nearly 97% of the teacher's original retrieval ca
 Based on the empirical evidence, the Distilled Student Model is the optimal choice for deployment. 
 The compression tradeoff here is highly favorable. By sacrificing only ~2.45% in top-1 retrieval recall, the resulting system is roughly three times smaller (storing only 12,528 parameters) and requires three times less computational power (reducing inference to 673,696 FLOPs) compared to the Part B baseline. 
 Given the explicit requirement to deploy a lightweight system on limited hardware, the distilled model provides the absolute best balance between semantic retrieval usefulness and operational efficiency.
+
+
+## Running it yourself
+
+```bash 
+uv venv .venv --python python@3.12
+uv sync
+uv run -m main
+```
