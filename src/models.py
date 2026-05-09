@@ -68,11 +68,27 @@ class DepthwiseSeparableBlock(nn.Module):
 
     def __init__(self, in_channels: int, out_channels: int, stride: int = 1) -> None:
         super().__init__()
-        self.block = nn.Identity()
-        raise NotImplementedError("Implement DepthwiseSeparableBlock before training SeparableCNN.")
+
+        # depthwise 3x3 conv
+        self.depthwise = nn.Sequential(
+            nn.Conv2d(
+                in_channels, in_channels, kernel_size=3,
+                stride=stride, padding=1, groups=in_channels, bias=False
+            ),
+            nn.BatchNorm2d(in_channels),
+            nn.ReLU()
+        )
+
+        # pointwise 1x1 conv
+        self.pointwise = nn.Sequential(
+            nn.Conv2d(in_channels, out_channels, kernel_size=1, bias=False),
+            nn.BatchNorm2d(out_channels),
+            nn.ReLU()
+        )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        return self.block(x)
+        x = self.depthwise(x)
+        return self.pointwise(x)
 
 
 class SeparableCNN(nn.Module):

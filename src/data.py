@@ -38,7 +38,7 @@ import torch
 from torch.utils.data import DataLoader, Dataset, Subset
 from torchvision import datasets, transforms
 
-from config import (
+from src.config import (
     CLASSIFICATION_TRAIN_SIZE,
     CLASSIFICATION_VAL_SIZE,
     DATA_ROOT,
